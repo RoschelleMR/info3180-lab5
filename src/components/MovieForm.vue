@@ -1,23 +1,39 @@
 <template>
-    <form @submit.prevent="saveMovie" id='movieForm'> 
+    <form @submit.prevent="saveMovie" id='movieForm' class="row g-3"> 
 
-        <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" class="formcontrol" />
-
-        <label for="desc" class="form-label">Desciption</label>
-        <input type="text" name="desc" class="formcontrol" />
-
-        <label for="poster" class="form-label">Poster</label>
-        <input 
-            type="file" 
-            name="poster"
-            class="formcontrol" 
-            accept=".jpg, .jpeg, .png, .gif"/>
-
-        <input type="submit" value="Submit">
+        <div class="col-12">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="formcontrol" />
+        </div>
+        
+        <div class="mb-3">
+            <label for="desc" class="form-label">Desciption</label>
+            <textarea type="text" name="desc" class="formcontrol " />
+        </div>
+        
+        <div>
+            <label for="poster" class="form-label">Poster</label>
+            <input 
+                type="file" 
+                name="poster"
+                class="formcontrol" 
+                accept=".jpg, .jpeg, .png, .gif"/>
+        </div>
+        
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+        
         
     </form>
 </template>
+
+<style>
+    body {
+        padding-top: 5rem;
+    }
+    
+</style>
 
 <script setup>
 
