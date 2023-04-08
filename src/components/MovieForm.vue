@@ -1,6 +1,18 @@
 <template>
     <form @submit.prevent="saveMovie" id='movieForm' class="row g-3"> 
 
+        <div v-if = "response_type == 'success'" class="alert alert-success">
+            {{ response.message }}
+        </div>
+
+        <div v-if = "response_type == 'error'" class="alert alert-danger">
+            <ul>
+                <li v-for="error in response.errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
+
         <div class="col-12">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" class="formcontrol" />
@@ -42,6 +54,8 @@
     }); 
 
     let csrf_token = ref("");  
+    let response = ref([]);
+    let response_type = ref("");
 
     function getCsrfToken() {     
         fetch('/api/v1/csrf-token')       
@@ -69,7 +83,16 @@
             })     
             .then(function (data) {         
                 // display a success message         
-                console.log(data, 'Success');     
+                console.log(data);
+
+                if(data.hasOwnProperty('errors')){
+                    response.value = data;
+                    response_type.value = 'error';
+                }   
+                else{
+                    response.value = data;
+                    response_type.value = 'success';
+                }  
             })     
             .catch(function (error) {         
                 console.log(error, 'Error');     
